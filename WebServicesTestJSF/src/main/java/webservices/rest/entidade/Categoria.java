@@ -25,7 +25,7 @@ public class Categoria implements Serializable {
 	@GeneratedValue
 	private Integer id;
 
-	@Column
+	@Column(nullable = false)
 	private String nome;
 
 	@OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
