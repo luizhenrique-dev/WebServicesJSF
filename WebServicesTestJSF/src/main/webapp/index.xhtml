@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <title>WebServices</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+      <h:head>
+      <script src="/WebServicesTestJSFProject/jquery-2.1.4.js"></script>
+      </h:head>
     <h:body>
-        Hello DevMedia!
+    Hello Devmedia !
+    <br/>
+    <h:form prependId="false">
+    <br/>
+    <br/>
+    Descrição: <h:inputText id="descricao" onkeyup="return localiza();"></h:inputText>
+    <h:selectOneMenu id="categoria">
+		<f:selectItems value="#{produtoControl.categorias}"></f:selectItems>    
+    </h:selectOneMenu>
+    <br/>
+    <br/>
+    <div id="lista"></div>
+    </h:form>
+    <script>
+    function localiza() {
+    	var descricao = $("#descricao");
+    	var categoria = $("#categoria");
+    	var lista = $("#lista")
+    	$.ajax( "http://localhost:8080/WebServicesTestJSFProject/webservice/produtoService/"+categoria.val()+"/"+descricao.val())
+  	  .done(function(data) {
+  		  var meuHtml = "<table>";
+    		jQuery.each(data, function(index, item) {
+    			meuHtml += "<tr>";
+    			meuHtml += "<td>img</td>";
+    			meuHtml += "<td>Nome: "+item.nome+"</td>";
+    			meuHtml += "<td>Descricao: "+item.descricao+"</td>";
+    			meuHtml += "</tr>";
+      		});
+    		meuHtml += "</table>";
+    		lista.html(meuHtml);
+  	  })
+  	  .fail(function() {
+  	    alert( "error" );
+  	  });
+    	
+    	
+    }
+    
+    </script>
+    
     </h:body>
 </html>
