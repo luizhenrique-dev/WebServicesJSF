@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/WebServicesTestJSF"/>
+<Context antiJARLocking="true" path="/WebServicesTestJSF">
+<Resource 
+        auth="Container" 
+        driverClassName="com.mysql.jdbc.Driver" 
+        maxActive="200" 
+        maxIdle="30" 
+        maxWait="10000" 
+        name="jdbc/WebserviceDB" 
+        password="@WebService93" 
+        type="javax.sql.DataSource" 
+        url="jdbc:mysql://localhost:3306/webservices?autoReconnect=true" 
+        username="webservice"
+        validationQuery="Select 1" />
+</Context>

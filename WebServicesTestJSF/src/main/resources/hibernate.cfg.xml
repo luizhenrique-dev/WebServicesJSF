@@ -3,10 +3,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost/webservices</property>	 
-        <property name="hibernate.connection.username">webservice</property>     
-        <property name="hibernate.connection.password">@WebService93</property>        
+        <property name="hibernate.connection.datasource">java:/comp/env/jdbc/WebserviceDB</property>     
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <!-- Configurações do C3PO para pool de conexões -->

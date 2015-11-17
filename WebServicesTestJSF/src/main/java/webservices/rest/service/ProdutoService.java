@@ -31,19 +31,19 @@ import webservices.rest.util.HibernateUtil;
 public class ProdutoService {
 
     @PersistenceContext
-    private EntityManager em;
     private Session sessao;
     private Transaction transacao;
 
     public List<Produto> getProdutosByDescricao(String descricao) {
         try {
+            System.out.println("chegou aqui 1!");
             sessao = HibernateUtil.getSessionFactory().getCurrentSession();
-            this.transacao = this.sessao.beginTransaction();
             String hql = "from Produto p where p.descricao = :descricao";
             org.hibernate.Query query = this.sessao.createQuery(hql);
             query.setString("descricao", descricao);
+            System.out.println("chegou aqui 2!");
             List<Produto> lista = query.list();
-            this.transacao.commit();
+            System.out.println("chegou aqui 3!");
             return lista;
         } catch (HibernateException e) {
             System.out.println("Não foi possível fazer a operação: " + e.getMessage());
@@ -63,13 +63,11 @@ public class ProdutoService {
     public List<Produto> getProdutosByCategoriaDescricao(String descricao, String categoria) {
         try {
             sessao = HibernateUtil.getSessionFactory().getCurrentSession();
-            this.transacao = this.sessao.beginTransaction();
             String hql = "from Produto p where p.descricao = :descricao and p.categoria.nome =:categoria";
             org.hibernate.Query query = this.sessao.createQuery(hql);
             query.setString("descricao", descricao);
             query.setString("categoria", categoria);
             List<Produto> lista = query.list();
-            this.transacao.commit();
             return lista;
         } catch (HibernateException e) {
             System.out.println("Não foi possível fazer a operação: " + e.getMessage());

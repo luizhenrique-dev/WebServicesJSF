@@ -40,10 +40,8 @@ public class CategoriaService {
         try {
             List<Categoria> categorias = null;
             sessao = HibernateUtil.getSessionFactory().getCurrentSession();
-            this.transacao = this.sessao.beginTransaction();
             Criteria filtro = this.sessao.createCriteria(Categoria.class);
             categorias = filtro.list();
-            this.transacao.commit();
             return categorias;
         } catch (HibernateException e) {
             System.out.println("Não foi possível fazer a operação: " + e.getMessage());
